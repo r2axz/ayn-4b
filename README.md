@@ -60,7 +60,7 @@ Portable QRP CW Transceiver
 
 ### Additional CMake Targets
 
-Use ```make flash``` to flash and ```make flash``` to erase an STM32 chip. These commands require an ST-LINK device and st-flash utility installed.
+Use ```make flash``` to flash and ```make erase``` to erase an STM32 chip. These commands require an ST-LINK device and st-flash utility installed.
 
 ## Links
 
