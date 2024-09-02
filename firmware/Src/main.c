@@ -46,6 +46,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include "si5351.h"
 #include "lcd.h"
 
