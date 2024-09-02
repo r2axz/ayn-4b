@@ -13,6 +13,9 @@ find_package(HAL COMPONENTS "${COMPONENT_LIST}" REQUIRED)
 
 set(FIRMWARE_TARGET ${CMAKE_PROJECT_NAME})
 
+set(CMAKE_C_FLAGS_DEBUG "-Og -g")
+set(CMAKE_C_FLAGS_RELEASE "-O3")
+
 add_executable(${FIRMWARE_TARGET}
     Src/main.c
     Src/stm32f1xx_hal_msp.c
