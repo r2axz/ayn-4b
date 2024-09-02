@@ -47,10 +47,10 @@ Portable QRP CW Transceiver
 3. Generate Makefile with CMake
 
     ```sh
-    STM32_TOOLCHAIN_PATH=/path/to/gcc-arm-none-eabi STM32_CUBE_F1_PATH=/path/to/STM32CubeF1 cmake /path/to/ayn-4b/firmware/
+    STM32_TOOLCHAIN_PATH=/path/to/gcc-arm-none-eabi STM32_CUBE_F1_PATH=/path/to/STM32CubeF1 cmake -DCMAKE_BUILD_TYPE=Release /path/to/ayn-4b/firmware/
     ```
 
-    Make sure to supply the correct paths.
+    Make sure to supply the correct paths. You can also use -DCMAKE_BUILD_TYPE=Debug to generate the debug informatin.
 
 4. Build the Firmware
 
