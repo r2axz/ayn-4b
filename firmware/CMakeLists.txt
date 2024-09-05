@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/stm32-cmake/cmake/stm32_gcc.cmake)
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
 include(FindPackageHandleStandardArgs)
 include(ExternalProject)
 
@@ -13,9 +17,6 @@ find_package(HAL COMPONENTS "${COMPONENT_LIST}" REQUIRED)
 
 set(FIRMWARE_TARGET ${CMAKE_PROJECT_NAME})
 
-set(CMAKE_C_FLAGS_DEBUG "-Og -g")
-set(CMAKE_C_FLAGS_RELEASE "-O3")
-
 add_executable(${FIRMWARE_TARGET}
     Src/main.c
     Src/stm32f1xx_hal_msp.c
@@ -23,6 +24,8 @@ add_executable(${FIRMWARE_TARGET}
     si5351/si5351.c
     lcd/lcd.c
 )
+
+target_compile_options(${FIRMWARE_TARGET} PRIVATE "$<$<CONFIG:DEBUG>:-Og>")
 
 target_include_directories(${FIRMWARE_TARGET} PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}/Inc
@@ -44,9 +47,9 @@ target_link_libraries(${FIRMWARE_TARGET}
     HAL::STM32::F1::CORTEX
     CMSIS::STM32::F103CB
     STM32::NoSys
+    STM32::Nano
+    STM32::Nano::FloatPrint
 )
-
-# adc;can;cec;cortex;crc;dac;dma;eth;exti;flash;gpio;hcd;i2c;i2s;irda;iwdg;mmc;nand;nor;pccard;pcd;pwr;rcc;rtc;sd;smartcard;spi;sram;tim;uart;usart;wwdg
 
 stm32_generate_hex_file(${FIRMWARE_TARGET})
 
